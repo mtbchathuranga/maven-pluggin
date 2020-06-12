@@ -41,47 +41,11 @@
         </pluginRepository>
     </pluginRepositories>
 
-    <repositories>
-        <repository>
-            <id>jcentral</id>
-            <name>bintray</name>
-            <url>https://jcenter.bintray.com</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>jcenter-snapshots</id>
-            <name>jcenter</name>
-            <url>https://oss.jfrog.org/artifactory/oss-snapshot-local/</url>
-        </repository>
-    </repositories>
-
     <dependencies>
         <dependency>
             <groupId>io.swagger</groupId>
             <artifactId>swagger-annotations</artifactId>
             <version>1.5.20</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>26.0-jre</version>
-        </dependency>
-        <dependency>
-            <groupId>net.logstash.logback</groupId>
-            <artifactId>logstash-logback-encoder</artifactId>
-            <version>5.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.dataformat</groupId>
-            <artifactId>jackson-dataformat-smile</artifactId>
-            <version>${jackson.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.module</groupId>
-            <artifactId>jackson-module-afterburner</artifactId>
-            <version>${jackson.version}</version>
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
@@ -95,29 +59,10 @@
             <version>${springfox.version}</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-staticdocs</artifactId>
             <version>2.6.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.module</groupId>
-            <artifactId>jackson-module-jsonSchema</artifactId>
-            <version>${jackson.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.github.robwin</groupId>
-            <artifactId>assertj-swagger</artifactId>
-            <version>0.8.1</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.github.swagger2markup</groupId>
-            <artifactId>swagger2markup-spring-restdocs-ext</artifactId>
-            <version>${swagger2markup.version}</version>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -257,38 +202,6 @@
                 </executions>
             </plugin>
 
-            <!-- specify the main class for the manifest -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.1.0</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>io.github.robwin.api.petstore.Application</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
-
-            <!-- copy dependencies to the lib directory -->
-            <plugin>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy-dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
             <!-- copy the generated documents -->
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
@@ -318,7 +231,7 @@
             <!-- =========================================== -->
             <!-- make sure antrun is after packaging plugins -->
             <!-- =========================================== -->
-            <plugin>
+            <!--<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
                 <version>1.8</version>
@@ -331,14 +244,14 @@
                         </goals>
                         <configuration>
                             <target>
-                                <!-- keyfile+passphrase or  password, choose one -->
-                                <!--
+                                &lt;!&ndash; keyfile+passphrase or  password, choose one &ndash;&gt;
+                                &lt;!&ndash;
                                 <scp localFile="${project.basedir}/target/qos-spark-1.0.jar"
                                   remoteToFile="root@192.168.203.156:/usr/sanss" verbose="true"
                                   keyfile="C:\Users\shengw\.ssh\192.168.203.156\id_rsa"
                                   passphrase="">
                                 </scp>
-                                 -->
+                                 &ndash;&gt;
                                 <scp localFile="${project.basedir}/target/asciidoc/html/index.html"
                                      remoteToFile="test@192.168.56.101:${html.ssh.folder.path}" verbose="true"
                                      password="abc" trust="true">
@@ -351,8 +264,8 @@
                         </configuration>
                     </execution>
                 </executions>
-                <!-- libraries for scp impl      -->
-                <!-- antrun doesn't use os's scp -->
+                &lt;!&ndash; libraries for scp impl      &ndash;&gt;
+                &lt;!&ndash; antrun doesn't use os's scp &ndash;&gt;
                 <dependencies>
                     <dependency>
                         <groupId>com.jcraft</groupId>
@@ -365,7 +278,7 @@
                         <version>1.6.5</version>
                     </dependency>
                 </dependencies>
-            </plugin>
+            </plugin>-->
             <!-- =========================================== -->
             <!--   antrun plugin end                         -->
             <!-- =========================================== -->
